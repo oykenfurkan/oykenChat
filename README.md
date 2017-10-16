@@ -1,3 +1,3 @@
 # oykenChat
 
-An encrypted chat application Firebase. For encryption I am using RSA encryption algorithm. Still developing.
+An encrypted chat application using Firebase. For encryption I am using RSA encryption algorithm. Still working on it.
