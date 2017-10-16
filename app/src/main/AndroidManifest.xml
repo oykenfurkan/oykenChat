@@ -30,7 +30,7 @@
         <activity android:name=".UI.NonFriendProfile" />
         <activity android:name=".UI.ImageViewActivity" />
         <activity android:name=".UI.ProfilDuzenle" />
-        <activity android:name=".UI.PpUpdate">
+        <activity android:name=".UI.EditProfile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

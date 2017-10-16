@@ -2,10 +2,7 @@ package com.furkan.profil.UI;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -120,7 +117,7 @@ public class UploadPicture extends AppCompatActivity implements View.OnClickList
 
         if (filePath != null) {
             //displaying a progress dialog while upload is going on
-            getUserAvatar();
+            savePicture();
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
@@ -195,7 +192,7 @@ public class UploadPicture extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void getUserAvatar() throws IOException {
+    public void savePicture() throws IOException {
         imageView.setDrawingCacheEnabled(true);
         imageView.buildDrawingCache();
         Bitmap bitmap = imageView.getDrawingCache();
