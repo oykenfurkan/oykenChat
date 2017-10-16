@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Fragments.ListeFragment"
+    >
+
+      <item
+          android:id="@+id/profil_duzenle"
+          android:icon="@drawable/ic_home_black_24dp"
+          android:title="Kartvizitini Düzenle" />
+
+      <item
+          android:id="@+id/uyelik"
+          android:icon="@drawable/ic_home_black_24dp"
+          android:title="Üyelik İşlemleri" />
+
+
+
+</menu>

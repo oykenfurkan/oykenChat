@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "524749245198",
+    "firebase_url": "https://profil-95859.firebaseio.com",
+    "project_id": "profil-95859",
+    "storage_bucket": "profil-95859.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524749245198:android:19cd86b919a0e35e",
+        "android_client_info": {
+          "package_name": "com.furkan.profil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524749245198-o02bm0i96q7n4n516a82jsl57shg6rtf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.furkan.profil",
+            "certificate_hash": "380463447a588e99a7c6c83d61947a6d469e9e69"
+          }
+        },
+        {
+          "client_id": "524749245198-kmidjepm5s4kifafm93pet5hdlk56sid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpD667R_zw6ZOCxiAYglsnqv7jw9cK6g0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524749245198-kmidjepm5s4kifafm93pet5hdlk56sid.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

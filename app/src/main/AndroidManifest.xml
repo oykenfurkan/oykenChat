@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.furkan.profil">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme"
+        tools:replace="android:supportsRtl">
+        <activity android:name=".Register.SifreSifirla" />
+        <activity android:name=".Helpers.ImageDownloader" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Register.Uyelik" />
+        <activity android:name=".UI.ProfilOlustur" />
+        <activity android:name=".UI.UploadPicture" />
+        <activity android:name=".Register.Register" />
+        <activity android:name=".UI.ProfilGoster" />
+        <activity android:name=".UI.AnaEkran" />
+        <activity android:name=".UI.ChatActivity" />
+        <activity android:name=".Register.Login">
+
+        </activity>
+        <activity android:name=".UI.NonFriendProfile" />
+        <activity android:name=".UI.ImageViewActivity" />
+        <activity android:name=".UI.ProfilDuzenle" />
+        <activity android:name=".UI.PpUpdate">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
