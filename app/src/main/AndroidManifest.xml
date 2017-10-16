@@ -25,18 +25,16 @@
         <activity android:name=".UI.AnaEkran" />
         <activity android:name=".UI.ChatActivity" />
         <activity android:name=".Register.Login">
-
-        </activity>
-        <activity android:name=".UI.NonFriendProfile" />
-        <activity android:name=".UI.ImageViewActivity" />
-        <activity android:name=".UI.ProfilDuzenle" />
-        <activity android:name=".UI.EditProfile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UI.NonFriendProfile" />
+        <activity android:name=".UI.ImageViewActivity" />
+        <activity android:name=".UI.EditProfile"/>
+
     </application>
 
 </manifest>

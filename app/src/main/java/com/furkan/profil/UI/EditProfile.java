@@ -43,7 +43,7 @@ import java.io.IOException;
 
 public class EditProfile extends AppCompatActivity {
     EditText name, email, cell, workphone, address, job;
-    Button btn;
+    Button btn, back;
     FirebaseUser currentUser;
     DatabaseReference mDatabase;
     String mCurrentuID;
@@ -71,6 +71,7 @@ public class EditProfile extends AppCompatActivity {
         imageview = (ImageView) findViewById(R.id.imageView);
         imagebutton = (ImageButton) findViewById(R.id.imageButton);
         btn = (Button) findViewById(R.id.button);
+        back= (Button) findViewById(R.id.back);
         progressDialog = new ProgressDialog(this);
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
@@ -150,6 +151,13 @@ public class EditProfile extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

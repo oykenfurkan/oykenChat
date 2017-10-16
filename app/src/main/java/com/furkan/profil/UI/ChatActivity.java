@@ -54,6 +54,7 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView mChatRecyclerView;
     @BindView(R.id.edit_text_message)
     EditText mUserMessageChatText;
+
     ImageView img;
     private FirebaseAuth mAuth;
     private static FirebaseUser user;
@@ -303,7 +304,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 ChatMessage newMessage = dataSnapshot.getValue(ChatMessage.class);
                 if (newMessage != null) {
-                    Log.i("Testtt00",  messageChatDatabase.toString());
+                    Log.i("Test",  messageChatDatabase.toString());
                     Log.i("newMessage içeriği", newMessage.getRecipient()+"///"+ newMessage.getSender());
                     //newMessage.setMessage(rsa.decryptString(user.getUid(),newMessage+.getMessage()));
 
