@@ -1,12 +1,18 @@
 package com.furkan.profil.Helpers;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.furkan.profil.Models.ChatMessage;
+import com.furkan.profil.Models.User;
 import com.furkan.profil.R;
+import com.furkan.profil.UI.ChatActivity;
+import com.furkan.profil.UI.NonFriendProfile;
+import com.furkan.profil.UI.ProfilGoster;
 
 import java.util.List;
 
@@ -103,19 +109,24 @@ public class MessageChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     /*ViewHolder for Sender*/
 
-    public class ViewHolderSender extends RecyclerView.ViewHolder {
+    public class ViewHolderSender extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView mSenderMessageTextView;
 
         public ViewHolderSender(View itemView) {
             super(itemView);
             mSenderMessageTextView =(TextView)itemView.findViewById(R.id.text_view_sender_message);
+            itemView.setOnClickListener(this);
         }
 
         public TextView getSenderMessageTextView() {
             return mSenderMessageTextView;
         }
 
+        public void onClick(View view) {
+            Toast.makeText(view.getContext(), "LongClick", Toast.LENGTH_LONG).show();
+
+        }
     }
 
 

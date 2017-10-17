@@ -1,12 +1,9 @@
 package com.furkan.profil.Models;
 
-import android.os.Handler;
-import android.widget.EditText;
-
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.ServerValue;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Map;
 
 public class ChatMessage {
 
@@ -14,19 +11,33 @@ public class ChatMessage {
     private String sMessage;
     private String sender;
     private String recipient;
-
     private int mRecipientOrSenderStatus;
+
+    public ChatMessage(String message, String sMessage, String sender, String recipient){
+        this.message = message;
+        this.sMessage = sMessage;
+        this.sender = sender;
+        this.recipient = recipient;
+    }
 
     public ChatMessage() {
     }
 
+    public void setRecipientOrSenderStatus(int recipientOrSenderStatus) {
+        this.mRecipientOrSenderStatus = recipientOrSenderStatus;
+    }
 
+    @Exclude
+    public int getRecipientOrSenderStatus() {
+        return mRecipientOrSenderStatus;
+    }
 
-    public ChatMessage(String message, String sMessage, String sender, String recipient) {
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
         this.message = message;
-        this.sMessage = sMessage;
-        this.recipient = recipient;
-        this.sender = sender;
     }
 
     public String getsMessage() {
@@ -37,29 +48,22 @@ public class ChatMessage {
         this.sMessage = sMessage;
     }
 
-    public void setRecipientOrSenderStatus(int recipientOrSenderStatus) {
-        this.mRecipientOrSenderStatus = recipientOrSenderStatus;
-    }
-
-
-    public String getMessage() {
-        return message;
-    }
-
-    public String getRecipient(){
-        return recipient;
-    }
-
-    public String getSender(){
+    public String getSender() {
         return sender;
     }
 
-    @Exclude
-    public int getRecipientOrSenderStatus() {
-        return mRecipientOrSenderStatus;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getRecipient() {
+        return recipient;
     }
+
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
+    }
+
+
+
 }

@@ -19,11 +19,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.furkan.profil.Helpers.MessageChatAdapter;
 import com.furkan.profil.Models.ChatMessage;
-import com.furkan.profil.Helpers.UsersChatAdapter;
 import com.furkan.profil.R;
 import com.furkan.profil.Helpers.RSAHelper;
 import com.furkan.profil.Register.Register;
-import com.furkan.profil.Models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -31,7 +29,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
@@ -62,7 +59,6 @@ public class ChatActivity extends AppCompatActivity {
     private String mCurrentUserId;
     private MessageChatAdapter messageChatAdapter;
     private DatabaseReference messageChatDatabase;
-    private DatabaseReference mUserRefDatabase;
     private DatabaseReference keyDatabase;
     private ChildEventListener messageChatListener;
     public String receiverPubkey;
@@ -109,6 +105,7 @@ public class ChatActivity extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     private void setPicture() {
@@ -153,7 +150,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     public void setDatabaseInstances(){
-        mUserRefDatabase = FirebaseDatabase.getInstance().getReference("users");
         messageChatDatabase = FirebaseDatabase.getInstance().getReference("chats");
         keyDatabase = FirebaseDatabase.getInstance().getReference("publicKeys");
     }
@@ -290,7 +286,6 @@ public class ChatActivity extends AppCompatActivity {
             encrypted = rsa.encryptString(receiverPublicKey, senderMessage);
             sencrypted = rsa.encryptString(senderPublicKey, senderMessage);
             ChatMessage newMessage = new ChatMessage(encrypted, sencrypted, mCurrentUserId, mRecipientId);
-
             messageChatDatabase.push().setValue(newMessage);
             mUserMessageChatText.setText("");
         }

@@ -21,7 +21,6 @@
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_chat_list" />
 
     <android.support.v7.widget.RecyclerView
         android:paddingTop="?attr/actionBarSize"
