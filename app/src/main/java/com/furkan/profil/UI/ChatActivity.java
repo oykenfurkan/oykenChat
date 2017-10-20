@@ -29,6 +29,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
@@ -37,7 +38,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -281,11 +287,12 @@ public class ChatActivity extends AppCompatActivity {
         String sencrypted;
         String senderMessage = mUserMessageChatText.getText().toString().trim();
 
+
         if (!senderMessage.isEmpty()) {
 
             encrypted = rsa.encryptString(receiverPublicKey, senderMessage);
             sencrypted = rsa.encryptString(senderPublicKey, senderMessage);
-            ChatMessage newMessage = new ChatMessage(encrypted, sencrypted, mCurrentUserId, mRecipientId);
+            ChatMessage newMessage = new ChatMessage(encrypted, sencrypted, mCurrentUserId, mRecipientId, System.currentTimeMillis());
             messageChatDatabase.push().setValue(newMessage);
             mUserMessageChatText.setText("");
         }

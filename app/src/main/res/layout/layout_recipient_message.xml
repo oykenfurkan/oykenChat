@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
+              android:orientation="horizontal"
               android:layout_height="wrap_content">
     <TextView
         android:id="@+id/text_view_recipient_message"
@@ -10,12 +11,22 @@
         tools:text="Hi. How are you?"
         android:padding="8dp"
         android:textStyle="bold"
-        android:layout_marginRight="60dp"
+        android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="2dp"
         android:textColor="#727272"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:background="@drawable/recipient_rounded_corners"/>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/text_view_recipient_message"
+        android:text="TextView"
+        android:textSize="12sp"
+        android:layout_gravity="bottom"
+        android:textStyle="italic"/>
+
+</LinearLayout>

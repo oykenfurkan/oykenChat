@@ -1,26 +1,30 @@
 package com.furkan.profil.Models;
 
+import android.text.format.DateUtils;
+import android.util.Log;
+
 import com.google.firebase.database.Exclude;
-import com.google.firebase.database.ServerValue;
-
-import java.util.Map;
-
 public class ChatMessage {
 
     private String message;
     private String sMessage;
     private String sender;
     private String recipient;
+    private long timestap;
     private int mRecipientOrSenderStatus;
 
-    public ChatMessage(String message, String sMessage, String sender, String recipient){
+    public ChatMessage(String message, String sMessage, String sender, String recipient, Long timestap) {
         this.message = message;
         this.sMessage = sMessage;
         this.sender = sender;
         this.recipient = recipient;
+        this.timestap=timestap;
+         Log.i("test",DateUtils.getRelativeTimeSpanString(timestap,System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString());
+
     }
 
     public ChatMessage() {
+        //For Firebase.
     }
 
     public void setRecipientOrSenderStatus(int recipientOrSenderStatus) {
@@ -64,6 +68,11 @@ public class ChatMessage {
         this.recipient = recipient;
     }
 
+    public long getTimestap() {
+        return timestap;
+    }
 
-
+    public void setTimestap(long timestap) {
+        this.timestap = timestap;
+    }
 }
