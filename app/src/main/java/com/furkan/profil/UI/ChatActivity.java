@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -63,6 +64,7 @@ public class ChatActivity extends AppCompatActivity {
     private static FirebaseUser user;
     private String mRecipientId;
     private String mCurrentUserId;
+
     private MessageChatAdapter messageChatAdapter;
     private DatabaseReference messageChatDatabase;
     private DatabaseReference keyDatabase;
@@ -87,8 +89,6 @@ public class ChatActivity extends AppCompatActivity {
         img=(ImageView)findViewById(R.id.conversation_contact_photo);
         userName = (TextView) findViewById(R.id.action_bar_title_1);
 
-
-
         bindButterKnife();
         setDatabaseInstances();
         setFirebaseUser();
@@ -99,7 +99,6 @@ public class ChatActivity extends AppCompatActivity {
         setDatabaseName();
         setChatRecyclerView();
         queryMessages();
-
 
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -317,8 +316,9 @@ public class ChatActivity extends AppCompatActivity {
                         newMessage.setMessage(rsa.decryptString(user.getUid(), newMessage.getMessage()));
                         newMessage.setRecipientOrSenderStatus(MessageChatAdapter.RECIPIENT);
                     }
-                    messageChatAdapter.refillAdapter(newMessage);
+                    messageChatAdapter.refillAdapter(newMessage,dataSnapshot.getKey());
                     mChatRecyclerView.scrollToPosition(messageChatAdapter.getItemCount() - 1);
+
                 }
 
             }
