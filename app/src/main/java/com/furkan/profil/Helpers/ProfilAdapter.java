@@ -47,9 +47,9 @@ public class ProfilAdapter extends RecyclerView.Adapter<ProfilAdapter.ViewHolder
     private List<User> mUsers;
     private Context mContext;
     private String mCurrentUserId;
-    int sendNum;
+    private int sendNum;
     public static Bus bus;
-    Boolean ctrl=false;
+
     public ProfilAdapter(Context context, List<User> fireChatUsers) {
         mUsers = fireChatUsers;
         mContext = context;

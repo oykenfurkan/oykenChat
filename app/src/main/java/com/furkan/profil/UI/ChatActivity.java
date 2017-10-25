@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.otto.Bus;
 
 import java.io.File;
 import java.security.KeyFactory;
@@ -69,7 +70,9 @@ public class ChatActivity extends AppCompatActivity {
     private DatabaseReference messageChatDatabase;
     private DatabaseReference keyDatabase;
     private ChildEventListener messageChatListener;
-    public String receiverPubkey;
+    public static String receiverPubkey;
+    public static String sender;
+    public static String receiver;
     public String senderPubkey;
     RSAPublicKey receiverPublicKey;
     RSAPublicKey senderPublicKey;
@@ -77,22 +80,24 @@ public class ChatActivity extends AppCompatActivity {
     TextView userName;
     String name = "TEST";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_konusma);
 
+
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_chats);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        img=(ImageView)findViewById(R.id.conversation_contact_photo);
+        img = (ImageView) findViewById(R.id.conversation_contact_photo);
         userName = (TextView) findViewById(R.id.action_bar_title_1);
+
 
         bindButterKnife();
         setDatabaseInstances();
         setFirebaseUser();
-        userName.setText(name);
+        sender=name;
+        userName.setText(sender);
         setPicture();
         getReceiverPublicKey();
         getSenderPublicKey();
@@ -114,7 +119,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void setPicture() {
-        String completePath = Environment.getExternalStorageDirectory() + "/kucuk/" + mRecipientId +".jpg";
+        String completePath = Environment.getExternalStorageDirectory() + "/kucuk/" + mRecipientId + ".jpg";
         File file = new File(completePath);
         Log.i("Glide adresi", completePath);
         Uri imageUri = Uri.fromFile(file);
@@ -154,7 +159,7 @@ public class ChatActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setDatabaseInstances(){
+    public void setDatabaseInstances() {
         messageChatDatabase = FirebaseDatabase.getInstance().getReference("chats");
         keyDatabase = FirebaseDatabase.getInstance().getReference("publicKeys");
     }
@@ -247,6 +252,7 @@ public class ChatActivity extends AppCompatActivity {
         mChatRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mChatRecyclerView.setHasFixedSize(true);
         messageChatAdapter = new MessageChatAdapter(new ArrayList<ChatMessage>());
+
         mChatRecyclerView.setAdapter(messageChatAdapter);
     }
 
@@ -269,13 +275,13 @@ public class ChatActivity extends AppCompatActivity {
             messageChatDatabase.removeEventListener(messageChatListener);
         }
         messageChatAdapter.cleanUp();
-     //   setUserOffline();
+        //   setUserOffline();
     }
 
     private void setUserOffline() {
         if (mAuth.getCurrentUser() != null) {
             String userId = mAuth.getCurrentUser().getUid();
-       //     mUserRefDatabase.child(userId).child("connection").setValue(UsersChatAdapter.OFFLINE);
+            //     mUserRefDatabase.child(userId).child("connection").setValue(UsersChatAdapter.OFFLINE);
         }
     }
 
@@ -297,16 +303,15 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    public void queryMessages(){
+    public void queryMessages() {
         messageChatListener = messageChatDatabase.limitToFirst(50).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String previousChildKey) {
 
-
                 ChatMessage newMessage = dataSnapshot.getValue(ChatMessage.class);
                 if (newMessage != null) {
-                    Log.i("Test",  messageChatDatabase.toString());
-                    Log.i("newMessage içeriği", newMessage.getRecipient()+"///"+ newMessage.getSender());
+                    Log.i("Test", messageChatDatabase.toString());
+                    Log.i("newMessage içeriği", newMessage.getRecipient() + "///" + newMessage.getSender());
                     //newMessage.setMessage(rsa.decryptString(user.getUid(),newMessage+.getMessage()));
 
                     if (newMessage.getSender().equals(mCurrentUserId)) {
@@ -316,7 +321,7 @@ public class ChatActivity extends AppCompatActivity {
                         newMessage.setMessage(rsa.decryptString(user.getUid(), newMessage.getMessage()));
                         newMessage.setRecipientOrSenderStatus(MessageChatAdapter.RECIPIENT);
                     }
-                    messageChatAdapter.refillAdapter(newMessage,dataSnapshot.getKey());
+                    messageChatAdapter.refillAdapter(newMessage, dataSnapshot.getKey());
                     mChatRecyclerView.scrollToPosition(messageChatAdapter.getItemCount() - 1);
 
                 }

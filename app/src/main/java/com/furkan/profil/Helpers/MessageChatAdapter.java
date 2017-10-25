@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,10 +24,12 @@ import com.furkan.profil.Models.ChatMessage;
 import com.furkan.profil.Models.User;
 import com.furkan.profil.R;
 import com.furkan.profil.UI.ChatActivity;
+import com.furkan.profil.UI.MessageDetails;
 import com.furkan.profil.UI.NonFriendProfile;
 import com.furkan.profil.UI.ProfilGoster;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +37,7 @@ import java.util.List;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class MessageChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
+    String sender, receiver, receiverPubKey;
     private List<String> mIds= new ArrayList<>();
     private List<ChatMessage> mChatList;
     public static final int SENDER = 0;
@@ -43,6 +46,8 @@ public class MessageChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public MessageChatAdapter(List<ChatMessage> listOfFireChats) {
         mChatList = listOfFireChats;
+        this.sender=sender;
+        this.receiver=receiver;
     }
 
     @Override
@@ -89,8 +94,6 @@ public class MessageChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 configureRecipientView(viewHolderRecipient, position);
                 break;
         }
-
-
     }
 
     private void configureSenderView(ViewHolderSender viewHolderSender, int position) {
@@ -169,11 +172,21 @@ public class MessageChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             popup.getMenuInflater()
                     .inflate(R.menu.popup, popup.getMenu());
 
-            //registering popup with OnMenuItemClickListener
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 public boolean onMenuItemClick(MenuItem item) {
                     if (item.getItemId() == R.id.delete) {
                         delete(mChatList.get(getLayoutPosition()), getLayoutPosition());
+                    }else if(item.getItemId() == R.id.details){
+                        //SHOW MESSAGE DETAILS.
+                        Intent i=new Intent(v.getContext(), MessageDetails.class);
+                        i.putExtra("encryptedMessage",mChatList.get(getLayoutPosition()).getMessage());
+                        i.putExtra("timestamp",String.valueOf(mChatList.get(getLayoutPosition()).getTimestap()));
+                        i.putExtra("sender",mChatList.get(getLayoutPosition()).getSender());
+                        i.putExtra("receiver",mChatList.get(getLayoutPosition()).getRecipient());
+                        i.putExtra("message",mSenderMessageTextView.getText());
+                        i.putExtra("receiverPubKey",ChatActivity.receiverPubkey);
+
+                        v.getContext().startActivity(i);
                     }
                     return true;
                 }
@@ -227,6 +240,15 @@ public class MessageChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         delete(mChatList.get(getLayoutPosition()), getLayoutPosition());
                     }else if(item.getItemId() == R.id.details){
                         //SHOW MESSAGE DETAILS.
+                        Intent i=new Intent(v.getContext(), MessageDetails.class);
+                        i.putExtra("encryptedMessage",mChatList.get(getLayoutPosition()).getMessage());
+                        i.putExtra("timestamp",String.valueOf(mChatList.get(getLayoutPosition()).getTimestap()));
+                        i.putExtra("sender",mChatList.get(getLayoutPosition()).getSender());
+                        i.putExtra("receiver",mChatList.get(getLayoutPosition()).getRecipient());
+                        i.putExtra("message",mRecipientMessageTextView.getText());
+                        i.putExtra("receiverPubKey",ChatActivity.receiverPubkey);
+
+                        v.getContext().startActivity(i);
                     }
                     return true;
                 }

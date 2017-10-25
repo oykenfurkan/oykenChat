@@ -19,8 +19,6 @@ public class ChatMessage {
         this.sender = sender;
         this.recipient = recipient;
         this.timestap=timestap;
-         Log.i("test",DateUtils.getRelativeTimeSpanString(timestap,System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString());
-
     }
 
     public ChatMessage() {
