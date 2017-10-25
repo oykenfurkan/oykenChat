@@ -48,7 +48,6 @@ import java.io.IOException;
 
 public class ProfilGoster extends AppCompatActivity {
 
-    private boolean isImageFitToScreen = false;
     TextView name, cell, workphone, address, mail, job;
     Button btn;
     User u;

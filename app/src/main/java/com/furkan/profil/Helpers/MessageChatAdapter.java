@@ -37,7 +37,6 @@ import java.util.List;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
 public class MessageChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    String sender, receiver, receiverPubKey;
     private List<String> mIds= new ArrayList<>();
     private List<ChatMessage> mChatList;
     public static final int SENDER = 0;
@@ -46,8 +45,6 @@ public class MessageChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public MessageChatAdapter(List<ChatMessage> listOfFireChats) {
         mChatList = listOfFireChats;
-        this.sender=sender;
-        this.receiver=receiver;
     }
 
     @Override
@@ -179,10 +176,7 @@ public class MessageChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }else if(item.getItemId() == R.id.details){
                         //SHOW MESSAGE DETAILS.
                         Intent i=new Intent(v.getContext(), MessageDetails.class);
-                        i.putExtra("encryptedMessage",mChatList.get(getLayoutPosition()).getMessage());
                         i.putExtra("timestamp",String.valueOf(mChatList.get(getLayoutPosition()).getTimestap()));
-                        i.putExtra("sender",mChatList.get(getLayoutPosition()).getSender());
-                        i.putExtra("receiver",mChatList.get(getLayoutPosition()).getRecipient());
                         i.putExtra("message",mSenderMessageTextView.getText());
                         i.putExtra("receiverPubKey",ChatActivity.receiverPubkey);
 
@@ -241,14 +235,12 @@ public class MessageChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     }else if(item.getItemId() == R.id.details){
                         //SHOW MESSAGE DETAILS.
                         Intent i=new Intent(v.getContext(), MessageDetails.class);
-                        i.putExtra("encryptedMessage",mChatList.get(getLayoutPosition()).getMessage());
                         i.putExtra("timestamp",String.valueOf(mChatList.get(getLayoutPosition()).getTimestap()));
-                        i.putExtra("sender",mChatList.get(getLayoutPosition()).getSender());
-                        i.putExtra("receiver",mChatList.get(getLayoutPosition()).getRecipient());
                         i.putExtra("message",mRecipientMessageTextView.getText());
                         i.putExtra("receiverPubKey",ChatActivity.receiverPubkey);
 
                         v.getContext().startActivity(i);
+
                     }
                     return true;
                 }

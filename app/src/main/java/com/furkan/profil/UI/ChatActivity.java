@@ -142,7 +142,6 @@ public class ChatActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("Name");
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -271,10 +270,10 @@ public class ChatActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
-        if (messageChatListener != null) {
+     /*   if (messageChatListener != null) {
             messageChatDatabase.removeEventListener(messageChatListener);
         }
-        messageChatAdapter.cleanUp();
+        messageChatAdapter.cleanUp();*/
         //   setUserOffline();
     }
 

@@ -37,7 +37,6 @@ public class MessageDetails extends AppCompatActivity {
         cal.setTimeInMillis(Long.valueOf(getIntent().getStringExtra("timestamp")));
         String date = DateFormat.format("dd-MM-yyyy HH:mm:ss", cal).toString();
         timestamp.setText(String.valueOf(date));
-
-
     }
+
 }
